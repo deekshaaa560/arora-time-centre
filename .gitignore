@@ -1,0 +1,9 @@
+node_modules
+dist
+*.local
+.DS_Store
+tmp
+.agents
+skills-lock.json
+public/products-corrupt
+*.log

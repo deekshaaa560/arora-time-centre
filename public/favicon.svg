@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Arora Time Centre — Patel Nagar">
+  <title>Arora Time Centre — Patel Nagar</title>
+  <rect width="512" height="512" rx="104" fill="#ffffff"/>
+  <g transform="translate(22 30) scale(1.2)">
+    <g transform="translate(8.33 -59.33) scale(2.3333)">
+      <g>
+        <path d="M14.25 105.75A66 66 0 1 1 145.75 105.75" fill="none" stroke="#000000" stroke-width="1.9" stroke-linecap="round" opacity="0.95"/>
+        <g stroke="#000000" stroke-linecap="round">
+          <line x1="80" y1="55" x2="80" y2="40" stroke-width="2.6" opacity="0.75"/>
+          <line x1="85.59" y1="46.79" x2="86.27" y2="40.33" stroke-width="1.35" opacity="0.45"/>
+          <line x1="91.12" y1="47.67" x2="92.47" y2="41.31" stroke-width="1.35" opacity="0.45"/>
+          <line x1="96.53" y1="49.12" x2="98.54" y2="42.94" stroke-width="1.35" opacity="0.45"/>
+          <line x1="101.76" y1="51.13" x2="104.40" y2="45.19" stroke-width="1.35" opacity="0.45"/>
+          <line x1="102.5" y1="61.03" x2="110" y2="48.04" stroke-width="2.6" opacity="0.75"/>
+          <line x1="111.45" y1="56.72" x2="115.27" y2="51.46" stroke-width="1.35" opacity="0.45"/>
+          <line x1="115.80" y1="60.24" x2="120.15" y2="55.41" stroke-width="1.35" opacity="0.45"/>
+          <line x1="119.76" y1="64.20" x2="124.59" y2="59.85" stroke-width="1.35" opacity="0.45"/>
+          <line x1="123.28" y1="68.55" x2="128.54" y2="64.73" stroke-width="1.35" opacity="0.45"/>
+          <line x1="118.97" y1="77.5" x2="131.96" y2="70" stroke-width="2.6" opacity="0.75"/>
+          <line x1="128.87" y1="78.24" x2="134.81" y2="75.60" stroke-width="1.35" opacity="0.45"/>
+          <line x1="130.88" y1="83.47" x2="137.06" y2="81.46" stroke-width="1.35" opacity="0.45"/>
+          <line x1="132.33" y1="88.88" x2="138.69" y2="87.53" stroke-width="1.35" opacity="0.45"/>
+          <line x1="133.21" y1="94.41" x2="139.67" y2="93.73" stroke-width="1.35" opacity="0.45"/>
+          <line x1="125" y1="100" x2="140" y2="100" stroke-width="2.6" opacity="0.75"/>
+          <line x1="35" y1="100" x2="20" y2="100" stroke-width="2.6" opacity="0.75"/>
+          <line x1="26.79" y1="94.41" x2="20.33" y2="93.73" stroke-width="1.35" opacity="0.45"/>
+          <line x1="27.67" y1="88.88" x2="21.31" y2="87.53" stroke-width="1.35" opacity="0.45"/>
+          <line x1="29.12" y1="83.47" x2="22.94" y2="81.46" stroke-width="1.35" opacity="0.45"/>
+          <line x1="31.13" y1="78.24" x2="25.19" y2="75.60" stroke-width="1.35" opacity="0.45"/>
+          <line x1="41.03" y1="77.5" x2="28.04" y2="70" stroke-width="2.6" opacity="0.75"/>
+          <line x1="36.72" y1="68.55" x2="31.46" y2="64.73" stroke-width="1.35" opacity="0.45"/>
+          <line x1="40.24" y1="64.20" x2="35.41" y2="59.85" stroke-width="1.35" opacity="0.45"/>
+          <line x1="44.20" y1="60.24" x2="39.85" y2="55.41" stroke-width="1.35" opacity="0.45"/>
+          <line x1="48.55" y1="56.72" x2="44.73" y2="51.46" stroke-width="1.35" opacity="0.45"/>
+          <line x1="57.5" y1="61.03" x2="50" y2="48.04" stroke-width="2.6" opacity="0.75"/>
+          <line x1="58.24" y1="51.13" x2="55.60" y2="45.19" stroke-width="1.35" opacity="0.45"/>
+          <line x1="63.47" y1="49.12" x2="61.46" y2="42.94" stroke-width="1.35" opacity="0.45"/>
+          <line x1="68.88" y1="47.67" x2="67.53" y2="41.31" stroke-width="1.35" opacity="0.45"/>
+          <line x1="74.41" y1="46.79" x2="73.73" y2="40.33" stroke-width="1.35" opacity="0.45"/>
+        </g>
+        <g stroke="#000000" stroke-linecap="round">
+          <path d="M87.37 105.16L44.78 75.34" stroke-width="3.2"/>
+          <path d="M73.94 103.50L131.10 70.50" stroke-width="1.9"/>
+        </g>
+        <circle cx="80" cy="100" r="3.5" fill="none" stroke="#000000" stroke-width="1.6"/>
+        <circle cx="80" cy="100" r="1.25" fill="#000000"/>
+      </g>
+    </g>
+  </g>
+
+  <text x="256" y="350" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="104" textLength="400" lengthAdjust="spacing" fill="#000000">ARORA</text>
+  <text x="256" y="397" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="500" font-size="30" textLength="340" lengthAdjust="spacing" fill="#000000">TIME CENTRE</text>
+  <text x="256" y="451" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-weight="500" font-size="38" textLength="230" lengthAdjust="spacing" fill="#000000">Patel Nagar</text>
+</svg>

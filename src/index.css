@@ -1,0 +1,324 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Playfair Display", "Georgia", serif;
+  --font-body: "Inter", system-ui, sans-serif;
+
+  /* Theme: stealth-mono — pure black, white and greys */
+  --color-ink: #060606;
+  --color-ink-soft: #0f0f0f;
+  --color-ink-card: #161616;
+  --color-ink-line: #2a2a2a;
+  --color-gold: #e8e8e8;
+  --color-gold-soft: #ffffff;
+  --color-whatsapp: #25d366;
+  --color-cream: #f2f2f2;
+  --color-muted: #999999;
+}
+
+/* ── Theme presets — <html data-theme="..."> swaps every token ────────── */
+:root {
+  --hero-shadow: rgba(0, 0, 0, 0.85);
+  --card-glow: rgba(255, 255, 255, 0.18);
+}
+
+/* (the active theme is the @theme default above; presets below are kept
+   so you can switch later by changing data-theme on <html>) */
+
+html[data-theme="light-emerald"] {
+  --color-ink: #f4f1e8;
+  --color-ink-soft: #ebe6d9;
+  --color-ink-card: #fdfbf5;
+  --color-ink-line: #dcd4c0;
+  --color-gold: #0e6b4f;
+  --color-gold-soft: #0a5741;
+  --color-cream: #22201a;
+  --color-muted: #6e695c;
+  --hero-shadow: rgba(244, 241, 232, 0.9);
+  --card-glow: rgba(14, 107, 79, 0.25);
+}
+
+html[data-theme="light-navy"] {
+  --color-ink: #f6f8fb;
+  --color-ink-soft: #edf1f7;
+  --color-ink-card: #ffffff;
+  --color-ink-line: #d7dfea;
+  --color-gold: #1e40af;
+  --color-gold-soft: #183063;
+  --color-cream: #141821;
+  --color-muted: #5d6675;
+  --hero-shadow: rgba(246, 248, 251, 0.9);
+  --card-glow: rgba(30, 64, 175, 0.25);
+}
+
+html[data-theme="burgundy"] {
+  --color-ink: #230610;
+  --color-ink-soft: #2d0b17;
+  --color-ink-card: #38101e;
+  --color-ink-line: #55222f;
+  --color-gold: #e5a68c;
+  --color-gold-soft: #f2c7ae;
+  --color-cream: #f6e6df;
+  --color-muted: #c69c97;
+  --hero-shadow: rgba(20, 2, 8, 0.85);
+  --card-glow: rgba(229, 166, 140, 0.3);
+}
+
+html[data-theme="midnight-ice"] {
+  --color-ink: #070d14;
+  --color-ink-soft: #0c141d;
+  --color-ink-card: #111a26;
+  --color-ink-line: #1e2a3a;
+  --color-gold: #6fb7ff;
+  --color-gold-soft: #a8d4ff;
+  --color-cream: #e6eef7;
+  --color-muted: #8296ac;
+  --hero-shadow: rgba(2, 8, 16, 0.85);
+  --card-glow: rgba(111, 183, 255, 0.3);
+}
+
+html[data-theme="emerald-noir"] {
+  --color-ink: #060d0a;
+  --color-ink-soft: #0b1310;
+  --color-ink-card: #101a15;
+  --color-ink-line: #1c2e25;
+  --color-gold: #2fbf8f;
+  --color-gold-soft: #7ee7c3;
+  --color-cream: #e7f3ec;
+  --color-muted: #8aa79a;
+  --hero-shadow: rgba(2, 10, 6, 0.85);
+  --card-glow: rgba(47, 191, 143, 0.28);
+}
+
+html[data-theme="rose-charcoal"] {
+  --color-ink: #141013;
+  --color-ink-soft: #1b1519;
+  --color-ink-card: #231a21;
+  --color-ink-line: #362733;
+  --color-gold: #f2a0b5;
+  --color-gold-soft: #f7c6d3;
+  --color-cream: #f4e9ee;
+  --color-muted: #a78d9a;
+  --hero-shadow: rgba(12, 8, 12, 0.85);
+  --card-glow: rgba(242, 160, 181, 0.28);
+}
+
+html[data-theme="royal-purple"] {
+  --color-ink: #110821;
+  --color-ink-soft: #170d2b;
+  --color-ink-card: #1e1235;
+  --color-ink-line: #2f1f4d;
+  --color-gold: #b794f6;
+  --color-gold-soft: #d6bcfa;
+  --color-cream: #f0e9fb;
+  --color-muted: #9d8bb8;
+  --hero-shadow: rgba(10, 4, 24, 0.85);
+  --card-glow: rgba(183, 148, 246, 0.3);
+}
+
+html[data-theme="espresso-caramel"] {
+  --color-ink: #171008;
+  --color-ink-soft: #1e150c;
+  --color-ink-card: #261b10;
+  --color-ink-line: #3a2a19;
+  --color-gold: #d9a05b;
+  --color-gold-soft: #eec48d;
+  --color-cream: #f3e9da;
+  --color-muted: #a8917a;
+  --hero-shadow: rgba(16, 10, 4, 0.85);
+  --card-glow: rgba(217, 160, 91, 0.28);
+}
+
+html[data-theme="stealth-mono"] {
+  --color-ink: #060606;
+  --color-ink-soft: #0f0f0f;
+  --color-ink-card: #161616;
+  --color-ink-line: #2a2a2a;
+  --color-gold: #e8e8e8;
+  --color-gold-soft: #ffffff;
+  --color-cream: #f2f2f2;
+  --color-muted: #999999;
+  --hero-shadow: rgba(0, 0, 0, 0.85);
+  --card-glow: rgba(255, 255, 255, 0.18);
+}
+
+html[data-theme="sand-terracotta"] {
+  --color-ink: #f6efe6;
+  --color-ink-soft: #efe4d5;
+  --color-ink-card: #fffaf3;
+  --color-ink-line: #e0cfba;
+  --color-gold: #c2571f;
+  --color-gold-soft: #9c4718;
+  --color-cream: #2f2419;
+  --color-muted: #7d6c58;
+  --hero-shadow: rgba(246, 239, 230, 0.9);
+  --card-glow: rgba(194, 87, 31, 0.22);
+}
+
+html[data-theme="ocean-teal"] {
+  --color-ink: #f2f7f7;
+  --color-ink-soft: #e7f0f0;
+  --color-ink-card: #ffffff;
+  --color-ink-line: #cfe0df;
+  --color-gold: #0f766e;
+  --color-gold-soft: #0b5d57;
+  --color-cream: #10201f;
+  --color-muted: #5e7573;
+  --hero-shadow: rgba(242, 247, 247, 0.9);
+  --card-glow: rgba(15, 118, 110, 0.22);
+}
+
+html[data-theme="obsidian-copper"] {
+  --color-ink: #0d0b0a;
+  --color-ink-soft: #14100d;
+  --color-ink-card: #1b1512;
+  --color-ink-line: #2e231c;
+  --color-gold: #d9822b;
+  --color-gold-soft: #f0a55d;
+  --color-cream: #f3ece4;
+  --color-muted: #a1907f;
+  --hero-shadow: rgba(0, 0, 0, 0.85);
+  --card-glow: rgba(217, 130, 43, 0.32);
+}
+
+html[data-theme="midnight-champagne"] {
+  --color-ink: #0a0d14;
+  --color-ink-soft: #10141d;
+  --color-ink-card: #171c28;
+  --color-ink-line: #252e40;
+  --color-gold: #e3c58c;
+  --color-gold-soft: #f2dcb0;
+  --color-cream: #eef0f4;
+  --color-muted: #93a0b4;
+  --hero-shadow: rgba(3, 6, 12, 0.85);
+  --card-glow: rgba(227, 197, 140, 0.28);
+}
+
+html[data-theme="graphite-lime"] {
+  --color-ink: #0c0d0b;
+  --color-ink-soft: #121410;
+  --color-ink-card: #191c16;
+  --color-ink-line: #2a2f24;
+  --color-gold: #b8e02f;
+  --color-gold-soft: #d6f56a;
+  --color-cream: #eef2e6;
+  --color-muted: #9aa389;
+  --hero-shadow: rgba(4, 6, 3, 0.85);
+  --card-glow: rgba(184, 224, 47, 0.22);
+}
+
+html[data-theme="ink-crimson"] {
+  --color-ink: #0c0809;
+  --color-ink-soft: #140d0f;
+  --color-ink-card: #1c1215;
+  --color-ink-line: #332026;
+  --color-gold: #e0455f;
+  --color-gold-soft: #f27d90;
+  --color-cream: #f5e9eb;
+  --color-muted: #a98b91;
+  --hero-shadow: rgba(8, 3, 4, 0.85);
+  --card-glow: rgba(224, 69, 95, 0.28);
+}
+
+html[data-theme="forest-brass"] {
+  --color-ink: #070d0a;
+  --color-ink-soft: #0c1410;
+  --color-ink-card: #121c16;
+  --color-ink-line: #203026;
+  --color-gold: #c8a24a;
+  --color-gold-soft: #e0c47c;
+  --color-cream: #eaf0e9;
+  --color-muted: #8fa294;
+  --hero-shadow: rgba(2, 6, 4, 0.85);
+  --card-glow: rgba(200, 162, 74, 0.26);
+}
+
+html[data-theme="navy-steel"] {
+  --color-ink: #080d16;
+  --color-ink-soft: #0d1521;
+  --color-ink-card: #131d2c;
+  --color-ink-line: #223247;
+  --color-gold: #7fa7cf;
+  --color-gold-soft: #a9c6e4;
+  --color-cream: #e9eef5;
+  --color-muted: #8598ad;
+  --hero-shadow: rgba(2, 5, 10, 0.85);
+  --card-glow: rgba(127, 167, 207, 0.26);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-ink);
+  color: var(--color-cream);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-gold);
+  color: var(--color-ink);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-ink);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-ink-line);
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gold);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+/* Brand marquee */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  animation: marquee 42s linear infinite;
+}
+.marquee-track-reverse {
+  animation: marquee 36s linear infinite reverse;
+}
+.marquee:hover .marquee-track,
+.marquee:hover .marquee-track-reverse {
+  animation-play-state: paused;
+}
+
+/* Scroll hint bounce */
+@keyframes hint {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+.scroll-hint {
+  animation: hint 1.8s ease-in-out infinite;
+}

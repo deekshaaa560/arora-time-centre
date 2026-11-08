@@ -1,0 +1,830 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Arora Time Centre — Brand Guidelines</title>
+<meta name="description" content="The visual identity for Arora Time Centre: mark, lockups, colour, typography and usage." />
+<meta name="theme-color" content="#080808" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink: #080808;
+    --ink-soft: #0e0e0e;
+    --panel: #111110;
+    --line: rgba(242, 240, 234, 0.12);
+    --line-strong: rgba(242, 240, 234, 0.22);
+    --cream: #f2f0ea;
+    --muted: #918c83;
+    --faint: #605c55;
+    --gold: #c9a24b;
+    --deep-gold: #a67c2e;
+    --paper: #f4f1ea;
+    --paper-line: rgba(11, 11, 11, 0.14);
+    --paper-muted: #736c60;
+    --font-display: "Playfair Display", Georgia, serif;
+    --font-body: "Inter", system-ui, sans-serif;
+    --page: 1240px;
+    --pad: clamp(22px, 4vw, 56px);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--ink);
+    color: var(--cream);
+    font-family: var(--font-body);
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 55% at 50% -8%, rgba(201, 162, 75, 0.09), transparent 62%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  ::selection { background: var(--gold); color: var(--ink); }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; }
+
+  .shell { position: relative; z-index: 1; }
+
+  /* ── top bar ─────────────────────────────────────────── */
+  .topbar {
+    position: absolute;
+    inset: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    max-width: var(--page);
+    margin: 0 auto;
+    padding: 26px var(--pad);
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .topbar .brandline { color: var(--cream); letter-spacing: 0.18em; }
+  .topbar .dot { color: var(--gold); }
+  .topbar a { text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 3px; }
+  .topbar a:hover { color: var(--cream); border-color: var(--gold); }
+
+  /* ── cover ───────────────────────────────────────────── */
+  .cover {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px var(--pad) 40px;
+    position: relative;
+  }
+  .cover-kicker {
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 44px;
+  }
+  .cover-card {
+    background: var(--paper);
+    border-radius: 14px;
+    padding: clamp(30px, 4.5vw, 58px) clamp(30px, 6vw, 88px);
+    box-shadow: 0 34px 90px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+  }
+  .cover-logo {
+    width: min(460px, 70vw);
+    max-width: 100%;
+    height: auto;
+  }
+  .cover-line {
+    font-family: var(--font-display);
+    font-size: clamp(19px, 2.4vw, 28px);
+    font-style: italic;
+    color: var(--muted);
+    margin: 44px 0 0;
+    font-weight: 400;
+  }
+  .cover-meta {
+    position: absolute;
+    inset: auto var(--pad) 30px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    font-size: 9px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+  .cover-meta .scroll { color: var(--muted); }
+  .cover-rule {
+    width: 1px;
+    height: 48px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    margin-bottom: 26px;
+    opacity: 0.7;
+  }
+
+  /* ── chapters ────────────────────────────────────────── */
+  .chapter {
+    max-width: var(--page);
+    margin: 0 auto;
+    padding: clamp(66px, 9vw, 130px) var(--pad);
+    border-top: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: minmax(180px, 250px) minmax(0, 1fr);
+    gap: clamp(32px, 6vw, 90px);
+  }
+  .chapter-aside { position: sticky; top: 48px; align-self: start; }
+  .chapter-num {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+  .chapter-aside h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(30px, 3.2vw, 44px);
+    line-height: 1.04;
+    margin: 0;
+    letter-spacing: -0.015em;
+  }
+  .chapter-aside p {
+    color: var(--muted);
+    font-size: 12.5px;
+    line-height: 1.75;
+    margin: 20px 0 0;
+    max-width: 220px;
+  }
+  .chapter-body { min-width: 0; }
+  .eyebrow {
+    font-size: 9.5px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 0 0 18px;
+  }
+  .lede {
+    font-family: var(--font-display);
+    font-size: clamp(22px, 2.4vw, 32px);
+    line-height: 1.28;
+    font-weight: 400;
+    margin: 0 0 34px;
+    max-width: 720px;
+  }
+  .lede em { font-style: italic; color: var(--gold); }
+  .body-copy {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.8;
+    max-width: 640px;
+  }
+
+  /* ── mark chapter ────────────────────────────────────── */
+  .mark-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: clamp(24px, 4vw, 54px);
+    align-items: center;
+  }
+  .diagram {
+    position: relative;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    background:
+      radial-gradient(circle at 50% 42%, rgba(201, 162, 75, 0.055), transparent 62%),
+      #0b0b0b;
+    padding: clamp(26px, 4vw, 52px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .diagram::after {
+    content: "120 × 120";
+    position: absolute;
+    right: 16px;
+    bottom: 14px;
+    font-size: 8px;
+    letter-spacing: 0.22em;
+    color: var(--faint);
+  }
+  .diagram img { width: min(360px, 100%); height: auto; }
+  .notes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 26px 24px;
+  }
+  .note .note-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 9px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 9px;
+  }
+  .note .note-label::before {
+    content: "";
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+  .note h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 17px;
+    margin: 0 0 6px;
+  }
+  .note p { color: var(--muted); font-size: 12px; line-height: 1.7; margin: 0; }
+
+  /* ── lockups ─────────────────────────────────────────── */
+  .lock-grid { display: grid; gap: 16px; }
+  .lock-panel {
+    position: relative;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 240px;
+    padding: 46px 34px;
+    overflow: hidden;
+  }
+  .lock-panel.dark { background: #0b0b0b; }
+  .lock-panel.light { background: var(--paper); border-color: var(--paper-line); }
+  .lock-panel .tag {
+    position: absolute;
+    top: 15px;
+    left: 18px;
+    font-size: 8.5px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+  .lock-panel.light .tag { color: var(--paper-muted); }
+  .lock-panel .size {
+    position: absolute;
+    right: 18px;
+    bottom: 15px;
+    font-size: 8px;
+    letter-spacing: 0.18em;
+    color: var(--faint);
+  }
+  .lock-panel.light .size { color: var(--paper-muted); }
+  .lock-panel img { width: min(380px, 100%); height: auto; }
+  .lock-panel .primary-img { width: min(470px, 100%); }
+  .lock-panel .stack-img { width: min(210px, 70%); }
+  .lock-panel .mark-img { width: 140px; height: 140px; }
+
+  .lock-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .lock-caption {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 12px 2px 0;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+  .lock-caption strong { color: var(--cream); font-weight: 500; }
+  .lock-note { color: var(--muted); font-size: 12px; line-height: 1.7; margin: 22px 0 0; max-width: 640px; }
+
+  /* ── colour ──────────────────────────────────────────── */
+  .swatches {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .swatch {
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--panel);
+  }
+  .swatch .chip { height: 132px; }
+  .swatch .meta { padding: 16px 16px 18px; }
+  .swatch .meta strong { display: block; font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; }
+  .swatch .meta code {
+    display: block;
+    margin-top: 5px;
+    font-family: var(--font-body);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--gold);
+  }
+  .swatch .meta span { display: block; margin-top: 10px; font-size: 11px; line-height: 1.55; color: var(--muted); }
+  .swatch.on-light .meta code { color: var(--deep-gold); }
+  .colour-note {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.75;
+  }
+  .colour-note strong { color: var(--cream); font-weight: 500; }
+
+  /* ── type ────────────────────────────────────────────── */
+  .type-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .type-card {
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: clamp(24px, 3vw, 38px);
+    background: var(--panel);
+  }
+  .type-card .spec {
+    font-size: 8.5px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--faint);
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .type-display {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(52px, 7vw, 92px);
+    line-height: 0.9;
+    letter-spacing: 0.02em;
+    margin: 34px 0 20px;
+  }
+  .type-wordmark {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(30px, 3.4vw, 42px);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin: 34px 0 8px;
+  }
+  .type-descriptor {
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.46em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .type-alphabet {
+    font-family: var(--font-display);
+    font-size: 15px;
+    line-height: 1.9;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin: 22px 0 0;
+    word-break: break-word;
+  }
+  .type-body { font-size: 13px; line-height: 1.85; color: var(--muted); margin: 26px 0 0; max-width: 460px; }
+  .type-body strong { color: var(--cream); font-weight: 500; }
+
+  /* ── clearspace / scale ──────────────────────────────── */
+  .clear-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .clear-card {
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: clamp(26px, 4vw, 44px);
+    background: var(--panel);
+  }
+  .clear-frame {
+    margin: 18px auto 0;
+    width: min(270px, 100%);
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    position: relative;
+    border: 1px dashed rgba(201, 162, 75, 0.55);
+    border-radius: 4px;
+  }
+  .clear-frame::before {
+    content: "";
+    position: absolute;
+    inset: 16.5%;
+    border: 1px dashed var(--line-strong);
+    border-radius: 2px;
+  }
+  .clear-frame img { width: 67%; height: auto; position: relative; z-index: 1; }
+  .clear-frame .x-label {
+    position: absolute;
+    top: 6px;
+    left: 10px;
+    font-size: 8px;
+    letter-spacing: 0.18em;
+    color: var(--gold);
+  }
+  .clear-caption { font-size: 11px; line-height: 1.7; color: var(--muted); margin: 18px 0 0; }
+  .clear-caption strong { color: var(--cream); font-weight: 500; }
+
+  .scale-list { display: grid; gap: 0; margin-top: 8px; }
+  .scale-row {
+    display: grid;
+    grid-template-columns: 70px 1fr auto;
+    align-items: center;
+    gap: 18px;
+    padding: 17px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .scale-row:last-child { border-bottom: 0; }
+  .scale-row .px { font-size: 9px; letter-spacing: 0.18em; color: var(--faint); }
+  .scale-row .sample { display: flex; align-items: center; min-height: 64px; }
+  .scale-row .sample img { height: auto; }
+  .scale-row .use { font-size: 10px; color: var(--muted); text-align: right; letter-spacing: 0.04em; }
+
+  /* ── usage ───────────────────────────────────────────── */
+  .usage-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .usage-col {
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: clamp(24px, 3vw, 36px);
+    background: var(--panel);
+  }
+  .usage-col h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 22px;
+    margin: 0 0 6px;
+  }
+  .usage-col > p { font-size: 11px; color: var(--muted); margin: 0 0 22px; }
+  .usage-col ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; }
+  .usage-col li {
+    display: grid;
+    grid-template-columns: 18px 1fr;
+    gap: 10px;
+    font-size: 12px;
+    line-height: 1.65;
+    color: var(--muted);
+  }
+  .usage-col li strong { color: var(--cream); font-weight: 500; }
+  .usage-col .yes { color: var(--gold); font-size: 13px; line-height: 1.2; }
+  .usage-col .no { color: #b06a5a; font-size: 13px; line-height: 1.2; }
+
+  /* ── download ────────────────────────────────────────── */
+  .download {
+    max-width: var(--page);
+    margin: 0 auto;
+    padding: clamp(66px, 9vw, 120px) var(--pad) 90px;
+    border-top: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(32px, 6vw, 90px);
+    align-items: end;
+  }
+  .download h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(34px, 4.4vw, 58px);
+    line-height: 1.02;
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+  .download h2 em { font-style: italic; color: var(--gold); }
+  .download p { color: var(--muted); font-size: 13px; line-height: 1.8; margin: 18px 0 0; max-width: 380px; }
+  .download-links { display: flex; flex-wrap: wrap; gap: 10px; }
+  .download-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    padding: 11px 18px;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--cream);
+    transition: border-color .2s, color .2s, background .2s;
+  }
+  .download-links a:hover { border-color: var(--gold); color: var(--gold); }
+  .download-links a.primary { border-color: var(--gold); color: var(--gold); }
+  .download-links a.primary:hover { background: var(--gold); color: var(--ink); }
+
+  footer {
+    max-width: var(--page);
+    margin: 0 auto;
+    padding: 26px var(--pad) 34px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+  footer .gold { color: var(--gold); }
+
+  @media (max-width: 980px) {
+    .chapter { grid-template-columns: 1fr; gap: 30px; }
+    .chapter-aside { position: static; }
+    .chapter-aside p { max-width: 520px; }
+    .mark-grid { grid-template-columns: 1fr; }
+    .notes { grid-template-columns: 1fr 1fr; }
+    .swatches { grid-template-columns: 1fr 1fr; }
+    .type-grid, .clear-grid, .usage-grid, .lock-pair { grid-template-columns: 1fr; }
+    .download { grid-template-columns: 1fr; align-items: start; }
+    .cover-meta { font-size: 8px; }
+  }
+  @media (max-width: 620px) {
+    .topbar { font-size: 8.5px; letter-spacing: 0.18em; }
+    .topbar .guide-label { display: none; }
+    .cover { padding-top: 100px; }
+    .cover-kicker { margin-bottom: 32px; }
+    .cover-meta { flex-direction: column; align-items: center; gap: 8px; }
+    .notes { grid-template-columns: 1fr; }
+    .swatches { grid-template-columns: 1fr 1fr; }
+    .swatch .chip { height: 100px; }
+    .colour-note { grid-template-columns: 1fr; }
+    .scale-row { grid-template-columns: 52px 1fr; }
+    .scale-row .use { display: none; }
+    .download-links a { padding: 10px 14px; }
+    footer { flex-direction: column; gap: 8px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <header class="topbar">
+    <a href="/" class="brandline">Arora Time Centre</a>
+    <span class="guide-label">Brand guidelines <span class="dot">·</span> 01</span>
+    <a href="#downloads">Download assets</a>
+  </header>
+
+  <section class="cover">
+    <p class="cover-kicker">Brand identity · 2026</p>
+    <div class="cover-rule" aria-hidden="true"></div>
+    <div class="cover-card">
+      <img class="cover-logo" src="arora-logo-horizontal-light.svg" alt="Arora Time Centre" />
+    </div>
+    <p class="cover-line">Time, kept beautifully.</p>
+    <div class="cover-meta">
+      <span>Watch retail · Est. India</span>
+      <span class="scroll">Scroll to explore ↓</span>
+      <span>Identity system · v1.0</span>
+    </div>
+  </section>
+
+  <section class="chapter" id="mark">
+    <aside class="chapter-aside">
+      <span class="chapter-num">01 / 05</span>
+      <h2>The mark</h2>
+      <p>A watch dial, the family initial, and one quiet point of gold at the centre. Everything else is air.</p>
+    </aside>
+    <div class="chapter-body">
+      <p class="eyebrow">The monogram</p>
+      <p class="lede">A dial, a surname, and a <em>small sunrise</em> at its centre.</p>
+      <div class="mark-grid">
+        <div class="diagram">
+          <img src="arora-mark-construction.svg" alt="Construction of the Arora Time Centre mark on a 120 by 120 grid" />
+        </div>
+        <div class="notes">
+          <div class="note">
+            <div class="note-label">Bezel &amp; dial</div>
+            <h3>The case</h3>
+            <p>A single hairline case holds a 60-tick minute track: a longer index every five minutes. The dial, drawn without ornament.</p>
+          </div>
+          <div class="note">
+            <div class="note-label">Crown</div>
+            <h3>At three o'clock</h3>
+            <p>A fluted crown sits where it would on a wristwatch — the one asymmetry, and the clue that this is a timepiece.</p>
+          </div>
+          <div class="note">
+            <div class="note-label">Monogram</div>
+            <h3>The A</h3>
+            <p>Playfair Display SemiBold, outlined. The A fills the dial like a monument standing on the 9–3 axis.</p>
+          </div>
+          <div class="note">
+            <div class="note-label">Centre</div>
+            <h3>One dot of gold</h3>
+            <p>At the exact centre of the dial, on the A's crossbar, a champagne dot reads as a jewel, a pivot — or a sun rising over the line. Arora.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter" id="lockups">
+    <aside class="chapter-aside">
+      <span class="chapter-num">02 / 05</span>
+      <h2>Lockups</h2>
+      <p>Three arrangements, one voice. The horizontal lockup leads; the stacked mark takes over when the composition needs a centre.</p>
+    </aside>
+    <div class="chapter-body">
+      <p class="eyebrow">Primary system</p>
+      <div class="lock-grid">
+        <div>
+          <div class="lock-panel light">
+            <span class="tag">Horizontal · primary</span>
+            <img class="primary-img" src="arora-logo-horizontal-light.svg" alt="Primary horizontal Arora Time Centre logo on cream" />
+            <span class="size">Min. width 220px</span>
+          </div>
+          <div class="lock-caption"><span><strong>Primary lockup</strong> — headers, footer, press</span><span>Mark + rule + wordmark</span></div>
+        </div>
+        <div class="lock-pair">
+          <div>
+            <div class="lock-panel dark">
+              <span class="tag">Horizontal · dark</span>
+              <img src="arora-logo-horizontal-dark.svg" alt="Horizontal Arora Time Centre logo on dark" />
+            </div>
+            <div class="lock-caption"><span><strong>Dark surface</strong></span><span>Ink / champagne</span></div>
+          </div>
+          <div>
+            <div class="lock-panel dark">
+              <span class="tag">Stacked · dark</span>
+              <img class="stack-img" src="arora-logo-stacked-dark.svg" alt="Stacked Arora Time Centre logo on dark" />
+            </div>
+            <div class="lock-caption"><span><strong>Stacked</strong></span><span>Social / centre</span></div>
+          </div>
+        </div>
+        <div class="lock-pair">
+          <div>
+            <div class="lock-panel light">
+              <span class="tag">Stacked · light</span>
+              <img class="stack-img" src="arora-logo-stacked-light.svg" alt="Stacked Arora Time Centre logo on light" />
+            </div>
+            <div class="lock-caption"><span><strong>Stacked</strong></span><span>Paper / cream</span></div>
+          </div>
+          <div>
+            <div class="lock-panel dark">
+              <span class="tag">Monogram · app tile</span>
+              <img class="mark-img" src="arora-favicon.svg" alt="Arora Time Centre app tile" />
+            </div>
+            <div class="lock-caption"><span><strong>Monogram</strong></span><span>Favicon / avatar</span></div>
+          </div>
+        </div>
+      </div>
+      <p class="lock-note">Keep the mark's spacing intact when scaling. The lockup may be reproduced in one colour (cream or ink) when the champagne dot cannot be printed or rendered.</p>
+    </div>
+  </section>
+
+  <section class="chapter" id="colour">
+    <aside class="chapter-aside">
+      <span class="chapter-num">03 / 05</span>
+      <h2>Colour</h2>
+      <p>Ink and cream carry the identity. Champagne is the single warm note — the dot, and the descriptor when the surface allows.</p>
+    </aside>
+    <div class="chapter-body">
+      <p class="eyebrow">Palette</p>
+      <div class="swatches">
+        <div class="swatch">
+          <div class="chip" style="background:#0b0b0b"></div>
+          <div class="meta"><strong>Ink</strong><code>#0B0B0B</code><span>The field. Background, primary type on light.</span></div>
+        </div>
+        <div class="swatch on-light">
+          <div class="chip" style="background:#f2f0ea"></div>
+          <div class="meta"><strong>Cream</strong><code>#F2F0EA</code><span>The mark. Warm white for dark surfaces.</span></div>
+        </div>
+        <div class="swatch">
+          <div class="chip" style="background:#c9a24b"></div>
+          <div class="meta"><strong>Champagne</strong><code>#C9A24B</code><span>The accent. Minute track, dot and descriptor.</span></div>
+        </div>
+        <div class="swatch">
+          <div class="chip" style="background:#a67c2e"></div>
+          <div class="meta"><strong>Deep champagne</strong><code>#A67C2E</code><span>Accent on cream and other light surfaces.</span></div>
+        </div>
+      </div>
+      <div class="colour-note">
+        <p><strong>One accent, not a palette.</strong> The mark is drawn in one base colour with a single accent. Champagne appears in the minute track, the centre dot and the TIME CENTRE descriptor. Never let it spread into the bezel, the crown or the A.</p>
+        <p><strong>Adaptive by design.</strong> On the website the mark and wordmark inherit the interface text colour, while the minute track and dot stay champagne — so the identity reads across every storefront theme. On paper, use Ink + Champagne, or the mono mark.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter" id="type">
+    <aside class="chapter-aside">
+      <span class="chapter-num">04 / 05</span>
+      <h2>Typography</h2>
+      <p>Playfair Display holds the name. Inter carries the small, spaced descriptors. No third face.</p>
+    </aside>
+    <div class="chapter-body">
+      <p class="eyebrow">Typefaces</p>
+      <div class="type-grid">
+        <div class="type-card">
+          <div class="spec"><span>Display · Wordmark</span><span>Playfair Display</span></div>
+          <div class="type-display">Aa</div>
+          <div class="type-wordmark">Arora</div>
+          <div class="type-descriptor">SemiBold · 600 · 0.14em</div>
+          <div class="type-alphabet">A B C D E F G H I J K L M<br />N O P Q R S T U V W X Y Z<br />0 1 2 3 4 5 6 7 8 9 · &amp;</div>
+        </div>
+        <div class="type-card">
+          <div class="spec"><span>Descriptor · UI</span><span>Inter</span></div>
+          <div class="type-display" style="font-family:var(--font-body);font-weight:300;font-size:clamp(48px,6vw,80px)">Aa</div>
+          <div class="type-descriptor" style="font-size:15px">Time Centre</div>
+          <div class="type-descriptor" style="margin-top:10px">Medium · 500 · 0.46em</div>
+          <p class="type-body"><strong>Inter</strong> is the working face for navigation, body copy and the descriptor line. It stays quiet: light weights for prose, medium for labels, generous tracking on capitals.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter" id="space">
+    <aside class="chapter-aside">
+      <span class="chapter-num">05 / 05</span>
+      <h2>Space &amp; scale</h2>
+      <p>Give the mark room. It should never feel packed into a corner or crowded by type.</p>
+    </aside>
+    <div class="chapter-body">
+      <p class="eyebrow">Clearspace &amp; minimum sizes</p>
+      <div class="clear-grid">
+        <div class="clear-card">
+          <div class="spec" style="font-size:8.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--faint);display:flex;justify-content:space-between"><span>Clearspace</span><span>x = 25% of height</span></div>
+          <div class="clear-frame"><span class="x-label">x</span><img src="arora-mark-dark.svg" alt="Arora Time Centre mark with clearspace" /></div>
+          <p class="clear-caption">Keep a clear margin of <strong>25% of the mark's height</strong> on all four sides. No type, rules or image edges inside this frame.</p>
+        </div>
+        <div class="clear-card">
+          <div class="spec" style="font-size:8.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--faint);display:flex;justify-content:space-between"><span>Minimum sizes</span><span>Digital</span></div>
+          <div class="scale-list">
+            <div class="scale-row"><span class="px">96 PX</span><span class="sample"><img src="arora-mark-dark.svg" style="width:96px" alt="Mark at 96 pixels" /></span><span class="use">Primary mark</span></div>
+            <div class="scale-row"><span class="px">48 PX</span><span class="sample"><img src="arora-mark-dark.svg" style="width:48px" alt="Mark at 48 pixels" /></span><span class="use">Compact mark</span></div>
+            <div class="scale-row"><span class="px">32 PX</span><span class="sample"><img src="arora-mark-dark.svg" style="width:32px" alt="Mark at 32 pixels" /></span><span class="use">Monogram floor</span></div>
+            <div class="scale-row"><span class="px">16 PX</span><span class="sample"><img src="arora-favicon.svg" style="width:16px;height:16px" alt="Favicon at 16 pixels" /></span><span class="use">Favicon tile</span></div>
+          </div>
+          <p class="clear-caption">Use the full mark from <strong>32px</strong> up. Below that, the app tile and simplified favicon carry the identity. The horizontal lockup should not run below <strong>220px</strong> wide.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter" id="usage">
+    <aside class="chapter-aside">
+      <span class="chapter-num">The rules</span>
+      <h2>Use it well</h2>
+      <p>A short list. When in doubt, remove something.</p>
+    </aside>
+    <div class="chapter-body">
+      <p class="eyebrow">Do &amp; don't</p>
+      <div class="usage-grid">
+        <div class="usage-col">
+          <h3>Always</h3>
+          <p>Treat the mark like a watch: precise, unhurried, uncluttered.</p>
+          <ul>
+            <li><span class="yes">✦</span><span><strong>Scale from the SVG.</strong> Keep the outlined proportions and the champagne dial details.</span></li>
+            <li><span class="yes">✦</span><span><strong>Use the light or dark lockup.</strong> Cream on ink, ink on cream — never mid-tone on mid-tone.</span></li>
+            <li><span class="yes">✦</span><span><strong>Keep the clearspace.</strong> The mark needs air on every side, especially next to type.</span></li>
+            <li><span class="yes">✦</span><span><strong>Choose the register.</strong> Horizontal for width, stacked for a centre, monogram for an icon.</span></li>
+          </ul>
+        </div>
+        <div class="usage-col">
+          <h3>Never</h3>
+          <p>Nothing decorative. The identity is already complete.</p>
+          <ul>
+            <li><span class="no">✕</span><span><strong>Stretch, rotate or outline</strong> the mark. It is drawn on a 120 × 120 grid.</span></li>
+            <li><span class="no">✕</span><span><strong>Recolour the A or the bezel.</strong> One base colour plus the champagne details; no gradients, shadows or glows.</span></li>
+            <li><span class="no">✕</span><span><strong>Replace the type.</strong> Playfair Display SemiBold and Inter Medium are the system.</span></li>
+            <li><span class="no">✕</span><span><strong>Crowd the dial.</strong> No extra ticks, hands, taglines or badges inside the bezel.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="download" id="downloads">
+    <div>
+      <p class="eyebrow">Assets</p>
+      <h2>The mark, <em>ready to use.</em></h2>
+      <p>Vector SVGs are the master files. PNGs are supplied for quick use at press and social sizes. Everything is drawn, not typed — no font installation required.</p>
+    </div>
+    <div class="download-links">
+      <a class="primary" href="arora-brand-kit.zip" download>Download the brand kit ↓</a>
+      <a href="arora-mark-dark.svg" download>Mark · dark</a>
+      <a href="arora-mark-light.svg" download>Mark · light</a>
+      <a href="arora-logo-horizontal-dark.svg" download>Horizontal · dark</a>
+      <a href="arora-logo-horizontal-light.svg" download>Horizontal · light</a>
+      <a href="arora-logo-card-light.svg" download>Logo card · light</a>
+      <a href="arora-logo-card-dark.svg" download>Logo card · dark</a>
+      <a href="arora-logo-stacked-dark.svg" download>Stacked · dark</a>
+      <a href="arora-logo-stacked-light.svg" download>Stacked · light</a>
+      <a href="/favicon.svg" download>Favicon</a>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Arora Time Centre</span>
+    <span>Brand guidelines <span class="gold">·</span> 01</span>
+    <span>Time, kept beautifully.</span>
+  </footer>
+</div>
+</body>
+</html>
