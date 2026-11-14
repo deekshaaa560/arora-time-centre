@@ -1,6 +1,13 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { useSearchParams } from "react-router-dom";
-import { WATCHES, CATALOG_BRANDS, type Gender, type Watch } from "../data/watches";
+import {
+  WATCHES,
+  CATALOG_BRANDS,
+  brandSlug,
+  findBrandByNameOrSlug,
+  findWatchByCode,
+  type Gender,
+} from "../data/watches";
 import WatchCard from "../components/WatchCard";
 import WatchModal from "../components/WatchModal";
 import { useReveal } from "../lib/useReveal";
@@ -75,13 +82,19 @@ export default function Collection({
   const scope = useRef<HTMLDivElement>(null);
   useReveal(scope);
 
-  const [searchParams] = useSearchParams();
-  const initialBrand = searchParams.get("brand");
-  const [brands, setBrands] = useState<Set<string>>(() =>
-    initialBrand && CATALOG_BRANDS.includes(initialBrand)
-      ? new Set([initialBrand])
-      : new Set(),
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  /** ?brand=titan,fastrack — slugs or plain names; kept in sync with the
+   *  brand checkboxes so any filtered view (or single watch) can be linked. */
+  const urlBrands = useMemo(
+    () =>
+      (searchParams.get("brand") ?? "")
+        .split(",")
+        .map((v) => findBrandByNameOrSlug(v))
+        .filter((b): b is string => b !== null),
+    [searchParams],
   );
+  const [brands, setBrands] = useState<Set<string>>(() => new Set(urlBrands));
   const [genders, setGenders] = useState<Set<Gender>>(new Set());
   const [band, setBand] = useState(0);
   const [minInput, setMinInput] = useState("");
@@ -90,8 +103,42 @@ export default function Collection({
   const [offerOnly, setOfferOnly] = useState(false);
   const [sort, setSort] = useState("price-asc");
   const [limit, setLimit] = useState(PAGE_SIZE);
-  const [selected, setSelected] = useState<Watch | null>(null);
   const [mobileFilters, setMobileFilters] = useState(false);
+
+  /** ?code=3273nl04 — the watch whose details are open (deep-linkable). */
+  const selected = useMemo(
+    () => findWatchByCode(searchParams.get("code") ?? "", urlBrands),
+    [searchParams, urlBrands],
+  );
+
+  const patchParams = (mutate: (sp: URLSearchParams) => void, replace = false) => {
+    const next = new URLSearchParams(searchParams);
+    mutate(next);
+    setSearchParams(next, { replace });
+  };
+
+  const openWatch = (id: string) =>
+    patchParams((sp) => sp.set("code", id));
+
+  const closeWatch = () => patchParams((sp) => sp.delete("code"), true);
+
+  const writeBrands = (next: Set<string>) => {
+    setBrands(next);
+    patchParams((sp) => {
+      const want = [...next].map(brandSlug).join(",");
+      if (want) sp.set("brand", want);
+      else sp.delete("brand");
+    }, true);
+  };
+
+  // Back/forward and pasted links update ?brand= — keep the checkboxes in sync.
+  useEffect(() => {
+    setBrands((prev) =>
+      prev.size === urlBrands.length && urlBrands.every((b) => prev.has(b))
+        ? prev
+        : new Set(urlBrands),
+    );
+  }, [urlBrands]);
 
   const pool = useMemo(
     () => (gender ? WATCHES.filter((w) => w.gender === gender) : WATCHES),
@@ -127,17 +174,13 @@ export default function Collection({
     return list;
   }, [pool, brands, genders, range.min, range.max, offerOnly, sort]);
 
-  const offerCount = useMemo(() => pool.filter((w) => w.discount > 0).length, [pool]);
-  const brandCounts = useMemo(() => {
-    const counts = new Map<string, number>();
-    for (const w of pool) counts.set(w.brand, (counts.get(w.brand) ?? 0) + 1);
-    return counts;
+  /** Only brands that actually have watches in the current collection
+   *  (e.g. Women's) get a checkbox — a 0-count brand is not shown. */
+  const brandsWithWatches = useMemo(() => {
+    const present = new Set<string>();
+    for (const w of pool) present.add(w.brand);
+    return CATALOG_BRANDS.filter((b) => present.has(b));
   }, [pool]);
-  const genderCounts = useMemo(() => {
-    const counts = new Map<Gender, number>();
-    for (const w of WATCHES) counts.set(w.gender, (counts.get(w.gender) ?? 0) + 1);
-    return counts;
-  }, []);
 
   const activeCount =
     brands.size + genders.size + (offerOnly ? 1 : 0) + (band !== 0 || customRange ? 1 : 0);
@@ -150,7 +193,7 @@ export default function Collection({
   };
 
   const clearAll = () => {
-    setBrands(new Set());
+    writeBrands(new Set());
     setGenders(new Set());
     setBand(0);
     setCustomRange(null);
@@ -214,31 +257,28 @@ export default function Collection({
       <Section title="On Offer" defaultOpen={false}>
         <label className="flex cursor-pointer items-center justify-between text-sm text-cream/85">
           <span>Discounted watches</span>
-          <span className="flex items-center gap-3">
-            <span className="text-xs text-muted">{offerCount}</span>
-            <button
-              role="switch"
-              aria-checked={offerOnly}
-              onClick={() => setOfferOnly((v) => !v)}
-              className={`relative h-5 w-9 rounded-full transition-colors ${offerOnly ? "bg-gold" : "bg-ink-line"}`}
-            >
-              <span
-                className={`absolute top-0.5 h-4 w-4 rounded-full transition-transform ${
-                  offerOnly ? "left-[18px] bg-ink" : "left-0.5 bg-cream"
-                }`}
-              />
-            </button>
-          </span>
+          <button
+            role="switch"
+            aria-checked={offerOnly}
+            onClick={() => setOfferOnly((v) => !v)}
+            className={`relative h-5 w-9 rounded-full transition-colors ${offerOnly ? "bg-gold" : "bg-ink-line"}`}
+          >
+            <span
+              className={`absolute top-0.5 h-4 w-4 rounded-full transition-transform ${
+                offerOnly ? "left-[18px] bg-ink" : "left-0.5 bg-cream"
+              }`}
+            />
+          </button>
         </label>
       </Section>
 
       <Section title="Brand">
         <div className="space-y-1">
-          {CATALOG_BRANDS.map((b) => (
+          {brandsWithWatches.map((b) => (
             <button
               key={b}
-              onClick={() => setBrands((s) => toggle(s, b))}
-              className="flex w-full items-center justify-between rounded-lg px-1 py-1.5 text-sm text-cream/85 hover:text-cream"
+              onClick={() => writeBrands(toggle(brands, b))}
+              className="flex w-full items-center rounded-lg px-1 py-1.5 text-sm text-cream/85 hover:text-cream"
             >
               <span className="flex items-center gap-2.5">
                 <span
@@ -254,7 +294,6 @@ export default function Collection({
                 </span>
                 {b}
               </span>
-              <span className="text-xs text-muted">{brandCounts.get(b) ?? 0}</span>
             </button>
           ))}
         </div>
@@ -267,7 +306,7 @@ export default function Collection({
               <button
                 key={g}
                 onClick={() => setGenders((s) => toggle(s, g))}
-                className="flex w-full items-center justify-between rounded-lg px-1 py-1.5 text-sm text-cream/85 hover:text-cream"
+                className="flex w-full items-center rounded-lg px-1 py-1.5 text-sm text-cream/85 hover:text-cream"
               >
                 <span className="flex items-center gap-2.5">
                   <span
@@ -283,7 +322,6 @@ export default function Collection({
                   </span>
                   {GENDER_LABEL[g]}
                 </span>
-                <span className="text-xs text-muted">{genderCounts.get(g) ?? 0}</span>
               </button>
             ))}
           </div>
@@ -367,7 +405,7 @@ export default function Collection({
             <>
               <div className="mt-5 grid grid-cols-2 gap-4 sm:gap-6 xl:grid-cols-3">
                 {visible.slice(0, limit).map((w) => (
-                  <WatchCard key={w.id} watch={w} onOpen={setSelected} />
+                  <WatchCard key={w.id} watch={w} onOpen={(x) => openWatch(x.id)} />
                 ))}
               </div>
               {limit < visible.length && (
@@ -412,7 +450,7 @@ export default function Collection({
         </div>
       )}
 
-      <WatchModal watch={selected} onClose={() => setSelected(null)} />
+      <WatchModal watch={selected} onClose={closeWatch} />
     </div>
   );
 }

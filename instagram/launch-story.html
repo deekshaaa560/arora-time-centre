@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Arora Time Centre — Website Launch Story</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink: #0b0b0b;
+    --cream: #f2f0ea;
+    --gold: #c9a24b;
+    --muted: #989287;
+    --paper: #f4efe4;
+    --paper-deep: #e7dcc8;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body { margin: 0; padding: 0; }
+
+  body {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    background: #000;
+    font-family: "Inter", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .story {
+    position: relative;
+    width: 1080px;
+    height: 1920px;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse 70% 38% at 50% 20%, rgba(201, 162, 75, 0.13), transparent 70%),
+      radial-gradient(ellipse 90% 55% at 50% 62%, rgba(201, 162, 75, 0.06), transparent 72%),
+      #0b0b0b;
+    color: var(--cream);
+    isolation: isolate;
+    flex: none;
+  }
+
+  /* grain */
+  .story::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    pointer-events: none;
+    opacity: 0.055;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* vignette */
+  .story::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 19;
+    pointer-events: none;
+    background: radial-gradient(ellipse 80% 75% at 50% 45%, transparent 45%, rgba(0, 0, 0, 0.55) 100%);
+  }
+
+  .frame {
+    position: absolute;
+    inset: 30px;
+    z-index: 18;
+    border: 1px solid rgba(242, 240, 234, 0.14);
+    pointer-events: none;
+  }
+
+  /* concentric dial rings */
+  .ring {
+    position: absolute;
+    left: 50%;
+    border-radius: 50%;
+    border: 1px solid rgba(201, 162, 75, 0.16);
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+  .ring--outer {
+    width: 990px;
+    height: 990px;
+    top: 522px;
+    border-color: rgba(201, 162, 75, 0.1);
+  }
+  .ring--inner {
+    width: 850px;
+    height: 850px;
+    top: 592px;
+    border-color: rgba(201, 162, 75, 0.18);
+  }
+
+  .content {
+    position: relative;
+    z-index: 5;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .lockup {
+    display: block;
+    width: 358px;
+    height: 112px;
+    margin-top: 166px;
+    opacity: 0.96;
+  }
+
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+    margin-top: 54px;
+    color: var(--gold);
+    font-size: 21px;
+    font-weight: 500;
+    letter-spacing: 0.46em;
+    text-transform: uppercase;
+    padding-left: 0.46em;
+  }
+  .eyebrow::before,
+  .eyebrow::after {
+    content: "";
+    display: block;
+    width: 74px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(201, 162, 75, 0.7));
+  }
+  .eyebrow::after {
+    background: linear-gradient(to left, transparent, rgba(201, 162, 75, 0.7));
+  }
+
+  .headline {
+    margin: 30px 0 0;
+    font-family: "Playfair Display", Georgia, serif;
+    font-weight: 500;
+    font-size: 158px;
+    line-height: 1.02;
+    letter-spacing: -0.028em;
+    color: var(--cream);
+  }
+  .headline em {
+    font-style: italic;
+    font-weight: 400;
+  }
+  .headline .dot { color: var(--gold); }
+
+  .subhead {
+    margin: 26px 0 0;
+    max-width: 780px;
+    font-size: 33px;
+    font-weight: 300;
+    line-height: 1.5;
+    letter-spacing: 0.005em;
+    color: rgba(242, 240, 234, 0.8);
+  }
+
+  .stats {
+    margin-top: 30px;
+    font-size: 19px;
+    font-weight: 500;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-left: 0.26em;
+  }
+  .stats b {
+    color: rgba(242, 240, 234, 0.9);
+    font-weight: 500;
+  }
+  .stats .sep {
+    display: inline-block;
+    margin: 0 15px;
+    color: var(--gold);
+    transform: translateY(-1px);
+  }
+
+  /* product arch */
+  .arch-wrap {
+    position: relative;
+    margin-top: 44px;
+    width: 640px;
+    height: 748px;
+    filter: drop-shadow(0 60px 90px rgba(0, 0, 0, 0.6));
+  }
+
+  .arch {
+    position: absolute;
+    inset: 0;
+    border-radius: 320px 320px 26px 26px;
+    overflow: hidden;
+    background:
+      linear-gradient(155deg, rgba(255, 255, 255, 0.55) 0%, transparent 38%),
+      linear-gradient(180deg, var(--paper) 0%, var(--paper-deep) 100%);
+    box-shadow:
+      inset 0 0 0 1px rgba(11, 11, 11, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  }
+
+  .arch-label {
+    position: absolute;
+    top: 46px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: rgba(11, 11, 11, 0.42);
+    padding-left: 0.34em;
+  }
+
+  .arch-watch {
+    position: absolute;
+    left: 50%;
+    top: 66px;
+    width: 590px;
+    height: 590px;
+    transform: translateX(-50%);
+    filter: contrast(1.03) saturate(1.02);
+  }
+
+  .arch-caption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 42px;
+    text-align: center;
+  }
+  .arch-caption strong {
+    display: block;
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 31px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(11, 11, 11, 0.84);
+  }
+  .arch-caption span {
+    display: block;
+    margin-top: 7px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(11, 11, 11, 0.45);
+    padding-left: 0.3em;
+  }
+
+  .cta {
+    margin-top: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    min-width: 488px;
+    height: 82px;
+    padding: 0 42px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, #d8b563 0%, var(--gold) 55%, #b78f38 100%);
+    box-shadow:
+      0 18px 40px rgba(201, 162, 75, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.45),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.18);
+    color: #100d07;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding-left: 0.18em;
+  }
+  .cta svg {
+    width: 25px;
+    height: 25px;
+    flex: none;
+  }
+
+  .footnote {
+    margin-top: 30px;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: rgba(242, 240, 234, 0.34);
+    padding-left: 0.32em;
+  }
+</style>
+</head>
+<body>
+  <main
+    class="story"
+    role="img"
+    aria-label="Instagram story for Arora Time Centre: Now live. It's time. The new website is live. 2,000+ watches, 20 brands, one address. Tap the link in bio."
+  >
+    <div class="ring ring--outer"></div>
+    <div class="ring ring--inner"></div>
+    <div class="frame"></div>
+
+    <div class="content">
+      <svg class="lockup" viewBox="0 0 384 120" role="img" aria-label="Arora Time Centre — Patel Nagar" focusable="false">
+        <title>Arora Time Centre — Patel Nagar</title>
+        <g transform="translate(4 6) scale(0.85)">
+        <path d="M14.25 105.75A66 66 0 1 1 145.75 105.75" fill="none" stroke="#ffffff" stroke-width="1.9" stroke-linecap="round" opacity="0.95" />
+        <g stroke="#ffffff" stroke-linecap="round"><line x1="80" y1="55" x2="80" y2="40" stroke-width="2.6" opacity="0.75" /><line x1="85.59227278481946" y1="46.793078597797376" x2="86.2717077960592" y2="40.3286862779036" stroke-width="1.35" opacity="0.45" /><line x1="91.12327545875013" y1="47.669103360741396" x2="92.47470144906556" y2="41.31114395597166" stroke-width="1.35" opacity="0.45" /><line x1="96.53240919905969" y1="49.11847637820929" x2="98.54101966249684" y2="42.93660902229079" stroke-width="1.35" opacity="0.45" /><line x1="101.7604104045553" y1="51.12531801612085" x2="104.40419858454801" y2="45.187272541443946" stroke-width="1.35" opacity="0.45" /><line x1="102.5" y1="61.02885682970026" x2="110" y2="48.03847577293368" stroke-width="2.6" opacity="0.75" /><line x1="111.44651099764731" y1="56.717590800940314" x2="115.26711513754839" y2="51.45898033750315" stroke-width="1.35" opacity="0.45" /><line x1="115.79848744019893" y1="60.24175183695941" x2="120.14783638153149" y2="55.411310471356344" stroke-width="1.35" opacity="0.45" /><line x1="119.75824816304059" y1="64.20151255980107" x2="124.58868952864366" y2="59.85216361846851" stroke-width="1.35" opacity="0.45" /><line x1="123.28240919905969" y1="68.55348900235269" x2="128.54101966249686" y2="64.73288486245161" stroke-width="1.35" opacity="0.45" /><line x1="118.97114317029974" y1="77.5" x2="131.96152422706632" y2="70" stroke-width="2.6" opacity="0.75" /><line x1="128.87468198387916" y1="78.23958959544468" x2="134.81272745855605" y2="75.59580141545199" stroke-width="1.35" opacity="0.45" /><line x1="130.8815236217907" y1="83.46759080094031" x2="137.06339097770922" y2="81.45898033750315" stroke-width="1.35" opacity="0.45" /><line x1="132.33089663925858" y1="88.87672454124987" x2="138.68885604402834" y2="87.52529855093444" stroke-width="1.35" opacity="0.45" /><line x1="133.20692140220262" y1="94.40772721518054" x2="139.6713137220964" y2="93.7282922039408" stroke-width="1.35" opacity="0.45" /><line x1="125" y1="100" x2="140" y2="100" stroke-width="2.6" opacity="0.75" /><line x1="35" y1="100.00000000000001" x2="20" y2="100.00000000000001" stroke-width="2.6" opacity="0.75" /><line x1="26.793078597797376" y1="94.40772721518057" x2="20.328686277903593" y2="93.72829220394082" stroke-width="1.35" opacity="0.45" /><line x1="27.66910336074139" y1="88.87672454124991" x2="21.31114395597165" y2="87.52529855093448" stroke-width="1.35" opacity="0.45" /><line x1="29.11847637820928" y1="83.46759080094031" x2="22.93660902229078" y2="81.45898033750316" stroke-width="1.35" opacity="0.45" /><line x1="31.125318016120858" y1="78.23958959544467" x2="25.187272541443953" y2="75.59580141545197" stroke-width="1.35" opacity="0.45" /><line x1="41.02885682970026" y1="77.5" x2="28.038475772933687" y2="70" stroke-width="2.6" opacity="0.75" /><line x1="36.71759080094031" y1="68.5534890023527" x2="31.45898033750315" y2="64.73288486245163" stroke-width="1.35" opacity="0.45" /><line x1="40.24175183695939" y1="64.2015125598011" x2="35.41131047135632" y2="59.85216361846853" stroke-width="1.35" opacity="0.45" /><line x1="44.20151255980109" y1="60.24175183695941" x2="39.85216361846851" y2="55.411310471356344" stroke-width="1.35" opacity="0.45" /><line x1="48.55348900235268" y1="56.717590800940314" x2="44.7328848624516" y2="51.45898033750316" stroke-width="1.35" opacity="0.45" /><line x1="57.49999999999998" y1="61.028856829700274" x2="49.99999999999997" y2="48.038475772933694" stroke-width="2.6" opacity="0.75" /><line x1="58.23958959544469" y1="51.12531801612085" x2="55.59580141545199" y2="45.18727254144394" stroke-width="1.35" opacity="0.45" /><line x1="63.4675908009403" y1="49.11847637820929" x2="61.45898033750314" y2="42.93660902229079" stroke-width="1.35" opacity="0.45" /><line x1="68.87672454124984" y1="47.6691033607414" x2="67.52529855093441" y2="41.311143955971666" stroke-width="1.35" opacity="0.45" /><line x1="74.40772721518054" y1="46.793078597797376" x2="73.7282922039408" y2="40.3286862779036" stroke-width="1.35" opacity="0.45" /></g>
+        <g stroke="#ffffff" stroke-linecap="round">
+          <path d="M87.37 105.16L44.78 75.34" stroke-width="3.2" />
+          <path d="M73.94 103.50L131.10 70.50" stroke-width="1.9" />
+        </g>
+        <circle cx="80" cy="100" r="3.5" fill="none" stroke="#ffffff" stroke-width="1.6" />
+        <circle cx="80" cy="100" r="1.25" fill="#ffffff" />
+      </g>
+        <text x="150" y="64" font-family="Cinzel, 'Playfair Display', Georgia, serif" font-weight="700" font-size="54" textLength="222" lengthAdjust="spacing" fill="#ffffff">ARORA</text>
+        <text x="150" y="90" font-family="Inter, system-ui, sans-serif" font-weight="500" font-size="16" textLength="205" lengthAdjust="spacing" fill="#ffffff">TIME CENTRE</text>
+        <text x="150" y="112" font-family="'Playfair Display', Georgia, serif" font-weight="500" font-size="19" textLength="128" lengthAdjust="spacing" fill="#ffffff">Patel Nagar</text>
+      </svg>
+
+      <div class="eyebrow">Now live</div>
+
+      <h1 class="headline">It’s <em>time</em><span class="dot">.</span></h1>
+
+      <p class="subhead">The new Arora Time Centre website is live.</p>
+
+      <p class="stats">
+        <b>2,000+</b> watches <span class="sep">·</span>
+        <b>20</b> brands <span class="sep">·</span>
+        One address
+      </p>
+
+      <div class="arch-wrap">
+        <div class="arch">
+          <div class="arch-label">The collection</div>
+          <img
+            class="arch-watch"
+            src="assets/titan-cutout.webp"
+            alt="Titan automatic wristwatch with rose gold case and black leather strap"
+            draggable="false"
+          />
+          <div class="arch-caption">
+            <strong>Titan</strong>
+            <span>Skeleton automatic</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta">
+        <span>Tap the link in bio</span>
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <div class="footnote">Patel Nagar · New Delhi</div>
+    </div>
+  </main>
+
+  <script>
+    // Make sure the screenshot waits for webfonts and product imagery.
+    window.__storyReady = Promise.all([
+      document.fonts.ready,
+      ...Array.from(document.images).map((img) =>
+        img.complete ? Promise.resolve() : new Promise((resolve) => {
+          img.addEventListener("load", resolve, { once: true });
+          img.addEventListener("error", resolve, { once: true });
+        })
+      ),
+    ]).then(() => true);
+  </script>
+</body>
+</html>

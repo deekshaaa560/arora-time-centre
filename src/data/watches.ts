@@ -67,7 +67,7 @@ export const WATCHES: Watch[] = (catalogJson as RawWatch[]).map((w) => ({
 }));
 
 /**
- * Marketing list of brands the shop carries in-store (20 brands).
+ * Marketing list of brands the shop carries in-store (22 brands).
  * Used by the footer, About page and the home marquee.
  */
 export const BRANDS = [
@@ -81,17 +81,18 @@ export const BRANDS = [
   "Casio",
   "G-Shock",
   "Michael Kors",
-  "Diesel",
   "DKNY",
   "Kenneth Cole",
   "Giordano",
-  "Thomas Earnshaw",
+  "Earnshaw",
   "Emporio Armani",
   "Alexandre Christie",
   "Alba",
   "Maxima",
   "Sonata",
   "Tommy Hilfiger",
+  "Bigotti Milano",
+  "Valentino Orlandi",
 ] as const;
 
 /** Brands actually present in the imported live stock */
@@ -99,7 +100,43 @@ export const CATALOG_BRANDS = Array.from(new Set(WATCHES.map((w) => w.brand))).s
 
 export const watchById = new Map(WATCHES.map((w) => [w.id, w]));
 
-/** Eight hero picks for the homepage — priciest in-stock pieces per brand */
+/** URL-safe brand key, e.g. "Tommy Hilfiger" → "tommy-hilfiger" */
+export const brandSlug = (brand: string) =>
+  brand
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+const BRAND_BY_SLUG = new Map(CATALOG_BRANDS.map((b) => [brandSlug(b), b]));
+
+/** Resolve a `?brand=` value — accepts slugs and full names, any casing */
+export function findBrandByNameOrSlug(value: string): string | null {
+  const v = value.trim();
+  if (!v) return null;
+  if (CATALOG_BRANDS.includes(v)) return v;
+  return BRAND_BY_SLUG.get(brandSlug(v)) ?? null;
+}
+
+/** Resolve a `?code=` value — model code (any casing) or full watch id */
+export function findWatchByCode(
+  code: string,
+  preferredBrands: readonly string[] = [],
+): Watch | null {
+  const needle = code.trim().toLowerCase();
+  if (!needle) return null;
+  const matches = WATCHES.filter(
+    (w) => w.model.toLowerCase() === needle || w.id.toLowerCase() === needle,
+  );
+  if (matches.length === 0) return null;
+  return matches.find((w) => preferredBrands.includes(w.brand)) ?? matches[0];
+}
+
+/** Shareable in-site link for one watch: brand slug + its product code, e.g.
+ *  `/collection?brand=titan&code=nl1184jm01` — opens that watch straight away. */
+export const watchLink = (w: Watch) =>
+  `/collection?brand=${brandSlug(w.brand)}&code=${encodeURIComponent(w.model.toLowerCase())}`;
+
+/** Hero picks for the homepage — priciest in-stock pieces per featured brand */
 export const FEATURED: Watch[] = (() => {
   const pick = (brand: string, gender: Gender, n: number) =>
     WATCHES.filter(
@@ -128,5 +165,10 @@ export const FEATURED: Watch[] = (() => {
     ...pick("Guess", "women", 1),
     ...pick("Tommy Hilfiger", "men", 1),
     ...pick("Tommy Hilfiger", "women", 1),
+    ...top("Bigotti Milano", 1),
+    ...top("Valentino Orlandi", 1),
+    /* 16 picks = four full rows of 4 — the home grid never ends half empty. */
+    ...top("Citizen", 1),
+    ...top("G-Shock", 1),
   ];
 })();

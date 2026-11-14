@@ -35,7 +35,7 @@
     "vite": "^8.3.5",
     "xlsx": "^0.18.5"
   },
-  "description": "A branded-watches storefront for an Indian store carrying 20 brands (Titan, Fastrack, Casio, G-Shock, Fossil, Citizen, Michael Kors, Emporio Armani and more).",
+  "description": "A branded-watches storefront for an Indian store carrying 22 brands (Titan, Fastrack, Casio, G-Shock, Fossil, Citizen, Michael Kors, Emporio Armani and more).",
   "main": "index.js",
   "keywords": [],
   "author": "",

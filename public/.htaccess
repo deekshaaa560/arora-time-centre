@@ -1,0 +1,22 @@
+# Arora Time Centre — Apache / cPanel (Hostinger, BigRock, GoDaddy, …)
+# Shipped to the web root with `npm run build` because it lives in public/.
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # One canonical address: https + bare domain. Without this, the same watch
+  # is reachable as http://, www., and bare — three different share links.
+  RewriteCond %{HTTPS} !=on [OR]
+  RewriteCond %{HTTP_HOST} ^www\.aroratimecentre\.in$ [NC]
+  RewriteRule ^(.*)$ https://aroratimecentre.in/$1 [R=301,L]
+
+  # Shared product links (/collection?brand=titan&code=rnu95219vm01) are
+  # client-side routes: anything that is not a real file must load the SPA.
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml image/svg+xml application/javascript application/json
+</IfModule>

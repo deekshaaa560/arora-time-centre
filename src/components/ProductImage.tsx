@@ -22,7 +22,7 @@ export default function ProductImage({
         <div className="text-center">
           <div className="font-display text-2xl text-ink">{watch.brand}</div>
           <div className="mt-1 text-[10px] tracking-widest text-ink/50 uppercase">
-            {watch.model}
+            Photo coming soon
           </div>
         </div>
       </div>

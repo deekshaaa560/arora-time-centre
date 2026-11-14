@@ -1,0 +1,32 @@
+# Arora Time Centre — Netlify. Vercel and Apache/cPanel equivalents:
+# `vercel.json` and `public/.htaccess`.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# One canonical address: www. and http:// 301 to https://aroratimecentre.in.
+# Listed before the SPA rule so the host swap wins for every path.
+[[redirects]]
+  from = "https://www.aroratimecentre.in/*"
+  to = "https://aroratimecentre.in/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://aroratimecentre.in/*"
+  to = "https://aroratimecentre.in/:splat"
+  status = 301
+  force = true
+
+# Shared product links (/collection?brand=titan&code=rnu95219vm01) are
+# client-side routes, so unknown paths must serve the SPA, not a 404 page.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[headers]]
+  for = "/products/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"

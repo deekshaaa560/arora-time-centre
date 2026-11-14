@@ -1,11 +1,10 @@
-import { useEffect, useState, type MouseEvent } from "react";
+import { useEffect, useState } from "react";
 import type { Watch } from "../data/watches";
 import { inr, discountPct } from "../lib/format";
 import { useCart } from "../context/CartContext";
-import { waUrl } from "../config";
+import { SHOP, waUrl } from "../config";
 import { displayName } from "../lib/displayName";
-import { watchInquiryMessage } from "../lib/watchShare";
-import { canShareImage, createWatchShareCard } from "../lib/watchShareCard";
+import { shareWatch, watchUrl } from "../lib/watchShare";
 import Icon from "./Icon";
 import WatchZoom from "./WatchZoom";
 
@@ -35,9 +34,22 @@ export default function WatchModal({
 }) {
   const { add, setDrawerOpen } = useCart();
   const [qty, setQty] = useState(1);
-  const [shareCard, setShareCard] = useState<File | null>(null);
+  const [linkState, setLinkState] = useState<"idle" | "copied" | "failed">("idle");
 
   useEffect(() => setQty(1), [watch]);
+  useEffect(() => setLinkState("idle"), [watch]);
+
+  useEffect(() => {
+    if (linkState === "idle") return;
+    const t = window.setTimeout(() => setLinkState("idle"), 2200);
+    return () => window.clearTimeout(t);
+  }, [linkState]);
+
+  const copyWatchLink = async () => {
+    if (!watch) return;
+    const result = await shareWatch(watch);
+    if (result !== "shared") setLinkState(result);
+  };
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
@@ -45,40 +57,14 @@ export default function WatchModal({
     return () => window.removeEventListener("keydown", onKey);
   }, [onClose]);
 
-  // Prepare the shareable watch card while the customer is viewing details.
-  useEffect(() => {
-    setShareCard(null);
-    if (!watch) return;
-    let cancelled = false;
-    createWatchShareCard(watch).then((file) => {
-      if (!cancelled) setShareCard(file);
-    });
-    return () => {
-      cancelled = true;
-    };
-  }, [watch]);
-
   if (!watch) return null;
   const off = discountPct(watch.price, watch.mrp);
 
-  const askWa = waUrl(watchInquiryMessage(watch, qty));
-
-  const shareOnWhatsApp = async (event: MouseEvent<HTMLAnchorElement>) => {
-    const file = shareCard;
-    if (!canShareImage(file)) return;
-
-    event.preventDefault();
-    try {
-      await navigator.share({
-        files: [file],
-        title: displayName(watch),
-        text: watchInquiryMessage(watch, qty),
-      });
-    } catch (error) {
-      if (error instanceof DOMException && error.name === "AbortError") return;
-      window.location.href = askWa;
-    }
-  };
+  // Plain chat — opens the conversation with a one-line reference to the watch.
+  // The code stays hidden on screen but rides along for the shop to look it up.
+  const askWa = waUrl(
+    `Hi ${SHOP.name}! I'd like to ask about the ${displayName(watch)} (Code ${watch.model}) from your website.`
+  );
 
   return (
     <div
@@ -135,8 +121,42 @@ export default function WatchModal({
             ) : (
               <span className="text-muted">● Currently sold out</span>
             )}
-            <span className="ml-2">· Code {watch.model}</span>
           </p>
+
+          {/* Direct product link — brand + code in the URL, one tap to copy */}
+          <div className="mt-4 flex items-center gap-2 rounded-xl border border-ink-line bg-ink-soft px-3 py-2">
+            <svg
+              viewBox="0 0 24 24"
+              className="h-4 w-4 shrink-0 text-gold"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+            >
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+            </svg>
+            <span className="min-w-0 flex-1 truncate text-xs text-muted" title={watchUrl(watch)}>
+              {watchUrl(watch)}
+            </span>
+            <button
+              onClick={copyWatchLink}
+              aria-label="Copy link to this watch"
+              className={`shrink-0 rounded-full px-3 py-1.5 text-[11px] font-bold tracking-wide uppercase transition-colors ${
+                linkState === "copied"
+                  ? "bg-gold text-ink"
+                  : linkState === "failed"
+                    ? "bg-red-500/20 text-red-300"
+                    : "border border-ink-line text-cream hover:border-gold hover:text-gold"
+              }`}
+            >
+              {linkState === "copied"
+                ? "Copied ✓"
+                : linkState === "failed"
+                  ? "Copy failed"
+                  : "Copy link"}
+            </button>
+          </div>
 
           <p className="mt-4 text-sm leading-relaxed text-muted">
             100% genuine with brand warranty and bill. Not sure about sizing or
@@ -210,14 +230,13 @@ export default function WatchModal({
             href={askWa}
             target="_blank"
             rel="noreferrer"
-            onClick={shareOnWhatsApp}
             className="mt-3 flex items-center justify-center gap-2 rounded-full border border-ink-line px-6 py-3 text-center text-sm font-semibold text-cream transition-colors hover:bg-white/5"
           >
             <Icon name="whatsapp" className="h-4 w-4" />
-            Send watch photo + details on WhatsApp
+            Chat on WhatsApp
           </a>
           <p className="mt-2 text-center text-[11px] text-muted">
-            The exact watch photo and its full details go with your message.
+            Opens a WhatsApp chat with the store.
           </p>
 
           <a

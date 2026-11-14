@@ -59,9 +59,6 @@ export default function WatchZoom({ watch }: { watch: Watch }) {
       <div className="flex aspect-[2/1] items-center justify-center border-b border-ink-line bg-white">
         <div className="text-center">
           <div className="font-display text-3xl text-ink">{watch.brand}</div>
-          <div className="mt-1 text-xs tracking-widest text-ink/50 uppercase">
-            {watch.model}
-          </div>
           <div className="mt-3 text-[10px] tracking-[0.18em] text-ink/40 uppercase">
             Photo coming soon
           </div>

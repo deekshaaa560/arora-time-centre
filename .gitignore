@@ -7,3 +7,5 @@ tmp
 skills-lock.json
 public/products-corrupt
 *.log
+*.tsbuildinfo
+*.tmp.webp

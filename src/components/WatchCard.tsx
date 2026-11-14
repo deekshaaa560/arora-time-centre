@@ -1,7 +1,8 @@
-import { useRef } from "react";
+import { useRef, useState, type MouseEvent } from "react";
 import type { Watch } from "../data/watches";
 import { inr, discountPct } from "../lib/format";
 import { displayName } from "../lib/displayName";
+import { shareWatch } from "../lib/watchShare";
 import { useCart } from "../context/CartContext";
 import ProductImage from "./ProductImage";
 
@@ -20,7 +21,18 @@ export default function WatchCard({
 }) {
   const { add, setDrawerOpen } = useCart();
   const zoomRef = useRef<HTMLDivElement>(null);
+  const [linkCopied, setLinkCopied] = useState(false);
   const off = discountPct(watch.price, watch.mrp);
+
+  const onShare = async (e: MouseEvent) => {
+    e.stopPropagation();
+    const result = await shareWatch(watch);
+    if (result !== "shared") {
+      setLinkCopied(result === "copied");
+      window.setTimeout(() => setLinkCopied(false), 1800);
+    }
+  };
+
   const stockLabel =
     watch.qty === null
       ? "In stock"
@@ -76,6 +88,39 @@ export default function WatchCard({
         >
           {stockLabel}
         </span>
+        <button
+          aria-label={`Share ${displayName(watch)}`}
+          title={linkCopied ? "Link copied!" : "Copy link to this watch"}
+          onClick={onShare}
+          className={`absolute bottom-3 right-3 z-20 flex items-center gap-1.5 rounded-full px-2.5 py-2 backdrop-blur transition-colors ${
+            linkCopied ? "bg-gold text-ink" : "bg-black/80 text-white hover:text-gold"
+          }`}
+        >
+          {linkCopied ? (
+            <>
+              <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="M5 13l4 4L19 7" />
+              </svg>
+              <span className="text-[11px] font-bold tracking-wide">COPIED</span>
+            </>
+          ) : (
+            <svg
+              viewBox="0 0 24 24"
+              className="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <circle cx="18" cy="5" r="3" />
+              <circle cx="6" cy="12" r="3" />
+              <circle cx="18" cy="19" r="3" />
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+            </svg>
+          )}
+        </button>
       </div>
 
       <div className="p-4">
